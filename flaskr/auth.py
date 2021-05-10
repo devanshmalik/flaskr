@@ -17,10 +17,10 @@ def register():
         password = request.form['password']
         db = get_db()
 
-        error = validate_user(password, username)
+        error = validate_user(username, password)
 
         if error is None:
-            register_in_db(password, username)
+            register_in_db(username, password)
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -43,7 +43,7 @@ def validate_user(username, password):
     return error
 
 
-def register_in_db(password, username):
+def register_in_db(username, password):
     db = get_db()
     db.execute(
         "INSERT INTO user (username, password) VALUES (?, ?)",
