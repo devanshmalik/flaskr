@@ -38,37 +38,6 @@ def runner(app):
     return app.test_cli_runner()
 
 
-class BlogActions(object):
-    def __init__(self, client, auth):
-        self._client = client
-        self._auth = auth
-        self._auth.login()
-
-    def create(self, title='test_title 2', body='test_body 2'):
-        return self._client.post(
-            '/create',
-            data={'title': title, 'body': body}
-        )
-
-    def update(self, title='updated_title_1', body='updated_body_1'):
-        return self._client.post(
-            '/1/update',
-            data={'title': title, 'body': body}
-        )
-
-    def delete(self):
-        return self._client.post(
-            '/1/delete'
-        )
-
-
-@pytest.fixture
-def blog(client, auth):
-    return BlogActions(client, auth)
-
-
-
-
 class AuthActions(object):
     def __init__(self, client):
         self._client = client
